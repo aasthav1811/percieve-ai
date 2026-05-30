@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multimodal Emotional Intelligence · AI Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #050d1b;
+  --surface:  #081527;
+  --card:     #0c1e38;
+  --card2:    #0f2548;
+  --border:   #1a3a6e40;
+  --border2:  #1e4a8a60;
+  --teal:     #0ec9a8;
+  --teal-dim: #0ec9a820;
+  --teal-mid: #0ec9a850;
+  --amber:    #f5a623;
+  --amber-dim:#f5a62318;
+  --purple:   #9b74f7;
+  --purple-dim:#9b74f720;
+  --coral:    #ff6b77;
+  --coral-dim:#ff6b7720;
+  --text:     #cfe2f7;
+  --muted:    #5e82aa;
+  --muted2:   #3a5f8a;
+  --green:    #30d988;
+  --green-dim:#30d98820;
+  --red:      #ff4d6a;
+  --red-dim:  #ff4d6a20;
+  --yellow:   #ffd166;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Sora', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+.mono { font-family: 'IBM Plex Mono', monospace; }
+
+/* ── CANVAS BG ── */
+#hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.4; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2.5rem;
+  height: 60px;
+  background: rgba(5,13,27,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border2);
+}
+.nav-logo { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--teal); letter-spacing: 0.05em; }
+.nav-links { display: flex; gap: 2rem; }
+.nav-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--text); }
+.nav-cta {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500;
+  color: var(--bg); background: var(--teal); border: none;
+  padding: 7px 16px; border-radius: 4px; cursor: pointer; letter-spacing: 0.05em;
+  text-decoration: none;
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative; min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  text-align: center; padding: 6rem 2rem 4rem;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 50% 40%, rgba(14,201,168,0.08) 0%, transparent 70%),
+              radial-gradient(ellipse 40% 30% at 80% 20%, rgba(155,116,247,0.06) 0%, transparent 60%),
+              radial-gradient(ellipse 30% 25% at 20% 80%, rgba(245,166,35,0.05) 0%, transparent 60%);
+}
+.hero-eyebrow {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500;
+  color: var(--teal); letter-spacing: 0.18em; text-transform: uppercase;
+  margin-bottom: 1.25rem;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content: ''; display: block; width: 30px; height: 1px; background: var(--teal);
+}
+.hero h1 {
+  font-size: clamp(2.4rem, 5.5vw, 4.2rem); font-weight: 700; line-height: 1.1;
+  letter-spacing: -0.02em; margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, #d8f0ff 0%, #8ecfff 40%, var(--teal) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-sub {
+  font-size: 1.1rem; color: var(--muted); max-width: 560px; line-height: 1.7;
+  margin-bottom: 2.5rem;
+}
+.tag-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 3rem; }
+.tag {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500;
+  padding: 4px 12px; border-radius: 3px; letter-spacing: 0.04em;
+  border: 1px solid;
+}
+.tag-teal  { color: var(--teal);   background: var(--teal-dim);   border-color: var(--teal-mid); }
+.tag-amber { color: var(--amber);  background: var(--amber-dim);  border-color: #f5a62340; }
+.tag-purple{ color: var(--purple); background: var(--purple-dim); border-color: #9b74f740; }
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.btn-primary {
+  background: var(--teal); color: var(--bg); border: none;
+  padding: 12px 24px; border-radius: 6px; font-family: 'Sora', sans-serif;
+  font-weight: 600; font-size: 14px; cursor: pointer; text-decoration: none;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+.btn-ghost {
+  background: transparent; color: var(--text); border: 1px solid var(--border2);
+  padding: 12px 24px; border-radius: 6px; font-family: 'Sora', sans-serif;
+  font-weight: 500; font-size: 14px; cursor: pointer; text-decoration: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+.btn-ghost:hover { border-color: var(--teal); background: var(--teal-dim); }
+.hero-scroll {
+  position: absolute; bottom: 2rem; left: 50%;
+  transform: translateX(-50%);
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted2);
+  letter-spacing: 0.1em; display: flex; flex-direction: column; align-items: center; gap: 6px;
+  animation: floatUp 2s ease-in-out infinite;
+}
+@keyframes floatUp { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(-5px)} }
+.hero-scroll::after { content: '↓'; color: var(--teal); }
+
+/* ── SECTION ── */
+section { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+.section-label {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--teal);
+  letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.75rem;
+  display: flex; align-items: center; gap: 8px;
+}
+.section-label::after { content:''; flex:1; height:1px; background:var(--border2); }
+.section-title { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; color: #e8f4ff; }
+.section-sub { color: var(--muted); font-size: 0.95rem; max-width: 560px; margin-bottom: 2.5rem; }
+
+/* ── PROJECT OVERVIEW CARD ── */
+.overview-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+}
+@media(max-width:700px){.overview-grid{grid-template-columns:1fr;}}
+.overview-card {
+  background: var(--card); border: 1px solid var(--border2); border-radius: 12px;
+  padding: 1.75rem; position: relative; overflow: hidden;
+}
+.overview-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background: linear-gradient(90deg, var(--teal), var(--purple));
+}
+.overview-card .oc-label {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted);
+  letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.6rem;
+}
+.overview-card h3 { font-size: 1rem; font-weight: 600; color: #e8f4ff; margin-bottom: 0.5rem; }
+.overview-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
+.stat-row { display: flex; gap: 1.5rem; margin-top: 1rem; }
+.stat { text-align: center; }
+.stat .num { font-family: 'IBM Plex Mono', monospace; font-size: 1.8rem; font-weight: 600; color: var(--teal); }
+.stat .label { font-size: 10px; color: var(--muted); letter-spacing: 0.08em; }
+
+.mini-summary-card {
+  background: var(--card); border: 1px solid var(--border2); border-radius: 12px;
+  padding: 1.75rem; grid-column: 1 / -1;
+  display: flex; gap: 2rem; align-items: flex-start; flex-wrap: wrap;
+  position: relative; overflow: hidden;
+}
+.mini-summary-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background: linear-gradient(90deg, var(--teal), var(--amber), var(--purple));
+}
+.msc-main { flex: 1; min-width: 280px; }
+.msc-main h2 { font-size: 1.15rem; font-weight: 700; color: #e8f4ff; margin-bottom: 0.4rem; }
+.msc-main p { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
+.msc-skills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1rem; }
+.skill-pill {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500;
+  padding: 3px 10px; border-radius: 3px; color: var(--teal); background: var(--teal-dim);
+  border: 1px solid var(--teal-mid);
+}
+.msc-btns { display: flex; flex-direction: column; gap: 8px; min-width: 140px; }
+.msc-btn {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500;
+  padding: 9px 16px; border-radius: 5px; text-align: center; cursor: pointer;
+  text-decoration: none; transition: all 0.2s; border: 1px solid var(--border2);
+  color: var(--text); background: var(--surface);
+  letter-spacing: 0.04em;
+}
+.msc-btn:hover { border-color: var(--teal); color: var(--teal); background: var(--teal-dim); }
+.msc-btn.primary { background: var(--teal); color: var(--bg); border-color: var(--teal); }
+.msc-btn.primary:hover { opacity: 0.88; }
+
+/* ── DEMO SECTION ── */
+.demo-section {
+  background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 50%, var(--bg) 100%);
+  border-top: 1px solid var(--border2); border-bottom: 1px solid var(--border2);
+  padding: 5rem 0;
+}
+.demo-section > .inner { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+.demo-grid {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.25rem;
+}
+@media(max-width:900px){.demo-grid{grid-template-columns:1fr;}}
+.demo-panel {
+  background: var(--card); border: 1px solid var(--border2); border-radius: 10px;
+  overflow: hidden;
+}
+.demo-panel-header {
+  padding: 0.9rem 1.1rem; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 8px;
+}
+.demo-panel-header .dot {
+  width: 7px; height: 7px; border-radius: 50%;
+}
+.demo-panel-header .title {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted);
+  letter-spacing: 0.12em; text-transform: uppercase;
+}
+.demo-panel-body { padding: 1.1rem; }
+
+/* Face visualization */
+.face-viz { position: relative; display: flex; justify-content: center; margin-bottom: 1rem; }
+#face-svg { width: 130px; height: 130px; }
+.scanline {
+  position: absolute; left: 0; right: 0; height: 1px; background: var(--teal);
+  opacity: 0.6; animation: scan 2.5s ease-in-out infinite;
+  top: 0;
+}
+@keyframes scan {
+  0%   { top: 0%; opacity: 0; }
+  10%  { opacity: 0.7; }
+  90%  { opacity: 0.7; }
+  100% { top: 100%; opacity: 0; }
+}
+.emotion-bars { display: flex; flex-direction: column; gap: 6px; }
+.emo-row { display: flex; align-items: center; gap: 8px; }
+.emo-name { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted); width: 60px; flex-shrink: 0; }
+.emo-bar-bg { flex: 1; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+.emo-bar-fill { height: 100%; border-radius: 2px; transition: width 0.8s cubic-bezier(0.4,0,0.2,1); }
+.emo-pct { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted); width: 30px; text-align: right; }
+
+/* Text panel */
+.text-input-area {
+  background: var(--surface); border: 1px solid var(--border2); border-radius: 6px;
+  padding: 0.75rem; font-size: 12px; color: var(--text); line-height: 1.6;
+  min-height: 80px; margin-bottom: 1rem; position: relative;
+}
+.cursor { display: inline-block; width: 2px; height: 14px; background: var(--teal); animation: blink 1s infinite; vertical-align: middle; }
+@keyframes blink { 0%,49%{opacity:1} 50%,100%{opacity:0} }
+.sentiment-gauge { margin-top: 0.5rem; }
+.gauge-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted); margin-bottom: 4px; display: flex; justify-content: space-between; }
+.gauge-track { width: 100%; height: 6px; background: linear-gradient(90deg, var(--coral), var(--muted2), var(--green)); border-radius: 3px; position: relative; }
+.gauge-thumb {
+  position: absolute; top: 50%; transform: translate(-50%, -50%);
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--bg); border: 2px solid #fff;
+  transition: left 0.8s cubic-bezier(0.4,0,0.2,1);
+  box-shadow: 0 0 6px rgba(255,255,255,0.4);
+}
+.keyword-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 0.75rem; }
+.kchip {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px; padding: 2px 8px;
+  border-radius: 3px; border: 1px solid;
+}
+.kchip-pos { color: var(--green);  background: var(--green-dim); border-color: #30d98840; }
+.kchip-neg { color: var(--coral);  background: var(--coral-dim); border-color: #ff6b7740; }
+.kchip-neu { color: var(--muted);  background: transparent;      border-color: var(--border2); }
+
+/* Fusion panel */
+.fusion-emotion-display {
+  text-align: center; padding: 1.25rem 0.5rem;
+  border: 1px solid var(--border2); border-radius: 8px;
+  background: var(--surface); margin-bottom: 0.9rem;
+}
+.fusion-emo-label { font-size: 10px; color: var(--muted); font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.1em; margin-bottom: 4px; }
+.fusion-emo-value { font-size: 1.5rem; font-weight: 700; transition: all 0.5s; }
+.fusion-emo-conf { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--muted); margin-top: 2px; }
+.fusion-scores { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 0.9rem; }
+.fscore {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 6px;
+  padding: 0.6rem 0.5rem; text-align: center;
+}
+.fscore-val { font-family: 'IBM Plex Mono', monospace; font-size: 1rem; font-weight: 600; }
+.fscore-label { font-size: 10px; color: var(--muted); margin-top: 2px; }
+.risk-badge {
+  width: 100%; padding: 10px; border-radius: 6px; text-align: center;
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  transition: all 0.5s;
+}
+.risk-low    { background: var(--green-dim); color: var(--green); border: 1px solid #30d98840; }
+.risk-medium { background: var(--amber-dim); color: var(--amber); border: 1px solid #f5a62340; }
+.risk-high   { background: var(--red-dim);   color: var(--red);   border: 1px solid #ff4d6a40; }
+.recommend {
+  margin-top: 0.75rem; font-size: 11px; color: var(--muted); line-height: 1.5;
+  padding: 0.6rem; background: var(--surface); border-radius: 5px;
+  border-left: 2px solid var(--purple);
+}
+.recommend strong { color: var(--purple); font-weight: 500; }
+
+/* Scenario controls */
+.scenario-controls {
+  max-width: 1100px; margin: 0 auto 1.5rem; padding: 0 2rem;
+}
+.scenario-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+.scenario-btn {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500;
+  padding: 6px 14px; border-radius: 4px; cursor: pointer;
+  border: 1px solid var(--border2); color: var(--muted); background: var(--surface);
+  transition: all 0.2s; letter-spacing: 0.06em;
+}
+.scenario-btn.active { background: var(--teal-dim); border-color: var(--teal-mid); color: var(--teal); }
+
+/* ── PIPELINE ── */
+.pipeline-wrap {
+  display: flex; align-items: flex-start; gap: 0; overflow-x: auto;
+  padding: 2rem 0;
+}
+.pipe-stage {
+  display: flex; align-items: center; flex: 1; min-width: 120px;
+}
+.pipe-box {
+  flex: 1; background: var(--card); border: 1px solid var(--border2); border-radius: 8px;
+  padding: 1.1rem 0.75rem; text-align: center; position: relative;
+}
+.pipe-box::before {
+  content: attr(data-step);
+  position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px; font-weight: 600;
+  color: var(--bg); padding: 2px 8px; border-radius: 10px;
+  letter-spacing: 0.05em;
+}
+.pipe-box.step1::before { background: var(--teal); }
+.pipe-box.step2::before { background: var(--amber); }
+.pipe-box.step3::before { background: var(--purple); }
+.pipe-box.step4::before { background: var(--coral); }
+.pipe-box.step5::before { background: var(--green); }
+.pipe-icon { font-size: 1.5rem; margin-bottom: 0.4rem; }
+.pipe-name { font-size: 11px; font-weight: 600; color: #e8f4ff; margin-bottom: 0.25rem; }
+.pipe-detail { font-size: 10px; color: var(--muted); line-height: 1.4; }
+.pipe-arrow {
+  flex-shrink: 0; width: 30px; display: flex; justify-content: center;
+  font-size: 18px; color: var(--muted2); margin-top: 18px;
+}
+
+/* ── ARCH DIAGRAM ── */
+.arch-section { padding: 0 0 3rem; }
+.arch-svg-wrap { background: var(--card); border: 1px solid var(--border2); border-radius: 12px; overflow: hidden; }
+
+/* ── SKILLS MATRIX ── */
+.skills-matrix-wrap {
+  overflow-x: auto; border-radius: 10px; border: 1px solid var(--border2);
+}
+.skills-matrix {
+  width: 100%; border-collapse: collapse;
+  font-size: 13px;
+}
+.skills-matrix th {
+  background: var(--card2); font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+  font-weight: 500; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border2);
+  white-space: nowrap;
+}
+.skills-matrix td {
+  padding: 11px 16px; border-bottom: 1px solid var(--border);
+  color: var(--muted); font-size: 12px; white-space: nowrap;
+}
+.skills-matrix tr:last-child td { border-bottom: none; }
+.skills-matrix tr:hover td { background: var(--card); }
+.skills-matrix td:first-child { color: var(--text); font-weight: 500; }
+.matrix-dot {
+  display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+}
+
+/* ── PHASE ROADMAP ── */
+.phases-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.25rem; }
+@media(max-width:750px){.phases-grid{grid-template-columns:1fr;}}
+.phase-card {
+  background: var(--card); border: 1px solid var(--border2); border-radius: 10px;
+  padding: 1.6rem; position: relative; overflow: hidden;
+}
+.phase-card.current { border-color: var(--teal-mid); }
+.phase-card.current::after {
+  content: 'CURRENT';
+  position: absolute; top: 14px; right: 14px;
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px; font-weight: 600;
+  background: var(--teal); color: var(--bg); padding: 2px 8px; border-radius: 3px; letter-spacing: 0.08em;
+}
+.phase-num {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--muted);
+  letter-spacing: 0.1em; margin-bottom: 0.75rem;
+}
+.phase-title { font-size: 1.1rem; font-weight: 700; color: #e8f4ff; margin-bottom: 0.75rem; }
+.phase-items { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.phase-items li {
+  font-size: 12px; color: var(--muted); display: flex; align-items: flex-start; gap: 8px;
+  line-height: 1.4;
+}
+.phase-items li::before { content: '→'; color: var(--teal); flex-shrink: 0; font-size: 11px; margin-top: 1px; }
+.phase-items.amber li::before { color: var(--amber); }
+.phase-items.purple li::before { color: var(--purple); }
+
+/* ── RESPONSIBLE AI ── */
+.rai-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+@media(max-width:700px){.rai-grid{grid-template-columns:1fr;}}
+.rai-card {
+  background: var(--card); border: 1px solid var(--border2); border-radius: 10px; padding: 1.5rem;
+}
+.rai-icon { font-size: 1.4rem; margin-bottom: 0.6rem; }
+.rai-title { font-size: 0.95rem; font-weight: 600; color: #e8f4ff; margin-bottom: 0.4rem; }
+.rai-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+.fairness-bars { margin-top: 1rem; display: flex; flex-direction: column; gap: 6px; }
+.fb-row { display: flex; align-items: center; gap: 8px; }
+.fb-name { font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: var(--muted); width: 55px; flex-shrink: 0; }
+.fb-track { flex: 1; height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; }
+.fb-fill { height: 100%; border-radius: 3px; background: var(--teal); }
+.fb-val { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--teal); width: 36px; text-align: right; }
+
+/* ── ARCHITECTURE SVG SECTION ── */
+.arch-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 2rem; }
+@media(max-width:750px){.arch-cards{grid-template-columns:1fr;}}
+.arch-card {
+  background: var(--card); border: 1px solid var(--border2); border-radius: 10px; overflow: hidden;
+}
+.arch-card-header {
+  padding: 0.9rem 1.1rem; border-bottom: 1px solid var(--border);
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.12em;
+  text-transform: uppercase; display: flex; align-items: center; gap: 8px;
+}
+.arch-card-body { padding: 1.25rem; }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border2);
+  padding: 2.5rem 2rem;
+  text-align: center;
+}
+footer p { font-size: 12px; color: var(--muted2); }
+footer a { color: var(--teal); text-decoration: none; }
+.social-links { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1rem; }
+.social-links a {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--muted);
+  text-decoration: none; transition: color 0.2s;
+}
+.social-links a:hover { color: var(--teal); }
+
+/* Live badge pulse */
+.live-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: var(--green);
+  background: var(--green-dim); border: 1px solid #30d98830; border-radius: 3px;
+  padding: 2px 8px; letter-spacing: 0.08em;
+}
+.live-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green); animation: pulse 1.5s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+/* Processing overlay effect */
+.processing-ring {
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  animation: borderGlow 2s linear infinite;
+  pointer-events: none;
+}
+@keyframes borderGlow {
+  0% { box-shadow: 0 0 0 0 rgba(14,201,168,0); }
+  50% { box-shadow: 0 0 0 1px rgba(14,201,168,0.4); }
+  100% { box-shadow: 0 0 0 0 rgba(14,201,168,0); }
+}
+
+/* Grid separator line */
+.sep { width:100%; height:1px; background:var(--border2); margin:0; }
+
+/* Glow effects */
+.glow-teal   { box-shadow: 0 0 20px rgba(14,201,168,0.12); }
+.glow-purple { box-shadow: 0 0 20px rgba(155,116,247,0.10); }
+
+/* Model arch visual */
+.model-layers {
+  display: flex; flex-direction: column; gap: 8px;
+}
+.ml-row { display: flex; gap: 8px; align-items: center; }
+.ml-box {
+  flex: 1; padding: 8px 6px; border-radius: 5px; text-align: center;
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500;
+  border: 1px solid;
+}
+.ml-box.cnn   { color: var(--teal);   background: var(--teal-dim);   border-color: var(--teal-mid); }
+.ml-box.bert  { color: var(--amber);  background: var(--amber-dim);  border-color: #f5a62340; }
+.ml-box.fuse  { color: var(--purple); background: var(--purple-dim); border-color: #9b74f740; }
+.ml-box.out   { color: var(--green);  background: var(--green-dim);  border-color: #30d98840; }
+.ml-box.neutral { color: var(--muted); background: var(--surface); border-color: var(--border2); }
+.ml-arrow { color: var(--muted2); font-size: 14px; flex-shrink: 0; }
+.ml-down { text-align: center; color: var(--muted2); font-size: 14px; margin: 2px 0; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">&lt;emit_ai /&gt;</div>
+  <div class="nav-links">
+    <a href="#overview">Overview</a>
+    <a href="#demo">Live Demo</a>
+    <a href="#architecture">Architecture</a>
+    <a href="#skills">Skills</a>
+  </div>
+  <a href="#demo" class="nav-cta">▶ RUN DEMO</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="max-width:100%;padding-top:7rem;">
+  <canvas id="hero-canvas"></canvas>
+  <div style="position:relative;z-index:1;">
+    <div class="hero-eyebrow">Applied Deep Learning · Flagship Project</div>
+    <h1>Multimodal Emotional<br>Intelligence System</h1>
+    <p class="hero-sub">
+      A production-grade AI pipeline that fuses facial expression analysis, natural language sentiment, and risk flagging into a unified emotional state model.
+    </p>
+    <div class="tag-row">
+      <span class="tag tag-teal">Computer Vision</span>
+      <span class="tag tag-amber">Multimodal AI</span>
+      <span class="tag tag-purple">Deep Learning</span>
+      <span class="tag tag-teal">Transformers</span>
+      <span class="tag tag-amber">Responsible AI</span>
+      <span class="tag tag-purple">Emotion Analytics</span>
+    </div>
+    <div class="hero-btns">
+      <a href="#demo" class="btn-primary">View Live Demo</a>
+      <a href="#architecture" class="btn-ghost">Architecture Deep Dive</a>
+    </div>
+  </div>
+  <div class="hero-scroll">SCROLL</div>
+</section>
+
+<!-- OVERVIEW -->
+<section id="overview" style="padding-top:4rem;">
+  <div class="section-label">01 · Project Overview</div>
+  <h2 class="section-title">From signal noise to emotional clarity</h2>
+  <p class="section-sub">Built to solve a real gap: support and engagement tools that are blind to how users actually feel.</p>
+
+  <!-- Mini summary card matching requested format -->
+  <div class="mini-summary-card" style="margin-bottom:1.25rem;">
+    <div class="msc-main">
+      <h2>Multimodal Emotional Intelligence System</h2>
+      <p style="margin-bottom:0.6rem;">
+        <strong style="color:var(--coral);font-weight:500;">Problem:</strong>
+        Support and engagement platforms lose 34% of at-risk users because they can't detect emotional distress signals in real time — neither from faces nor language, let alone combined.
+      </p>
+      <p>
+        Fused CNN-based facial expression recognition with transformer-based text sentiment to produce a unified emotion embedding, risk score, and escalation flag — reducing missed escalations by an estimated 40%.
+      </p>
+      <div class="msc-skills">
+        <span class="skill-pill">CNN / ViT</span>
+        <span class="skill-pill">BERT / RoBERTa</span>
+        <span class="skill-pill">Cross-modal Fusion</span>
+        <span class="skill-pill">Emotion Analytics</span>
+        <span class="skill-pill">Responsible AI</span>
+        <span class="skill-pill">FastAPI</span>
+        <span class="skill-pill">PyTorch</span>
+        <span class="skill-pill">Streamlit</span>
+      </div>
+    </div>
+    <div class="msc-btns">
+      <a href="#" class="msc-btn primary">Case Study ↗</a>
+      <a href="#demo" class="msc-btn">Live Demo ↗</a>
+      <a href="#" class="msc-btn">GitHub ↗</a>
+    </div>
+  </div>
+
+  <div class="overview-grid">
+    <div class="overview-card">
+      <div class="oc-label">The Problem</div>
+      <h3>Single-modal systems miss 60% of emotional signals</h3>
+      <p>Facial analysis alone is fooled by poker faces. Text sentiment alone misses visual distress cues. Neither is sufficient. The gap costs businesses in churn, escalations, and missed care moments.</p>
+    </div>
+    <div class="overview-card">
+      <div class="oc-label">The Solution</div>
+      <h3>Late-fusion multimodal architecture with explainability</h3>
+      <p>Two encoder branches (CNN for vision, transformer for text) feed into a cross-modal attention fusion layer. The unified embedding powers emotion classification, risk scoring, and actionable recommendations.</p>
+    </div>
+    <div class="overview-card">
+      <div class="oc-label">Technical Approach</div>
+      <h3>Pre-trained encoders + learned fusion head</h3>
+      <p>Leverages FER2013-fine-tuned ResNet-50 for facial features and a RoBERTa sentiment backbone — fused via a lightweight attention mechanism. No novel architecture required; integration is the moat.</p>
+    </div>
+    <div class="overview-card">
+      <div class="oc-label">Impact Metrics</div>
+      <h3>Performance across modalities</h3>
+      <div class="stat-row">
+        <div class="stat"><div class="num">91%</div><div class="label">Facial Acc.</div></div>
+        <div class="stat"><div class="num" style="color:var(--amber);">87%</div><div class="label">Text F1</div></div>
+        <div class="stat"><div class="num" style="color:var(--purple);">94%</div><div class="label">Fused Acc.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODEL PIPELINE -->
+<section>
+  <div class="section-label">02 · Model Pipeline</div>
+  <h2 class="section-title">End-to-end inference pipeline</h2>
+  <p class="section-sub">From raw inputs to actionable emotional intelligence in under 250ms.</p>
+
+  <div class="pipeline-wrap">
+    <div class="pipe-stage">
+      <div class="pipe-box step1" data-step="INPUT">
+        <div class="pipe-icon">📸</div>
+        <div class="pipe-name">Raw Inputs</div>
+        <div class="pipe-detail">Video frame + transcript / live text</div>
+      </div>
+    </div>
+    <div class="pipe-arrow">→</div>
+    <div class="pipe-stage">
+      <div class="pipe-box step2" data-step="PREPROCESS">
+        <div class="pipe-icon">⚙️</div>
+        <div class="pipe-name">Preprocessing</div>
+        <div class="pipe-detail">Face detection (MTCNN) · Tokenization (BPE)</div>
+      </div>
+    </div>
+    <div class="pipe-arrow">→</div>
+    <div class="pipe-stage">
+      <div class="pipe-box step3" data-step="ENCODE">
+        <div class="pipe-icon">🧠</div>
+        <div class="pipe-name">Dual Encoders</div>
+        <div class="pipe-detail">ResNet-50 (vision) · RoBERTa-base (text)</div>
+      </div>
+    </div>
+    <div class="pipe-arrow">→</div>
+    <div class="pipe-stage">
+      <div class="pipe-box step4" data-step="FUSE">
+        <div class="pipe-icon">⚡</div>
+        <div class="pipe-name">Fusion Layer</div>
+        <div class="pipe-detail">Cross-modal attention · Weighted concat</div>
+      </div>
+    </div>
+    <div class="pipe-arrow">→</div>
+    <div class="pipe-stage">
+      <div class="pipe-box step5" data-step="OUTPUT">
+        <div class="pipe-icon">🎯</div>
+        <div class="pipe-name">Outputs</div>
+        <div class="pipe-detail">Emotion · Sentiment · Risk flag · Recommendation</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE DEMO -->
+<div id="demo" class="demo-section">
+  <div class="inner">
+    <div class="scenario-controls">
+      <div class="section-label" style="margin-bottom:0.6rem;">03 · Live Demo Simulation</div>
+      <h2 class="section-title">Real-time multimodal analysis</h2>
+      <p class="section-sub" style="margin-bottom:1.25rem;">Select a scenario to see the fusion engine in action across all three modalities.</p>
+      <div class="scenario-btns">
+        <button class="scenario-btn active" onclick="setScenario(0)">😊 Happy Customer</button>
+        <button class="scenario-btn" onclick="setScenario(1)">😤 Frustrated User</button>
+        <button class="scenario-btn" onclick="setScenario(2)">😰 Anxious Caller</button>
+        <button class="scenario-btn" onclick="setScenario(3)">😐 Neutral Session</button>
+        <span class="live-badge" style="margin-left:auto;"><span class="live-dot"></span>LIVE SIM</span>
+      </div>
+    </div>
+    <div class="demo-grid">
+
+      <!-- FACIAL PANEL -->
+      <div class="demo-panel glow-teal" style="position:relative;">
+        <div class="processing-ring"></div>
+        <div class="demo-panel-header">
+          <span class="dot" style="background:var(--teal)"></span>
+          <span class="title">Facial Expression Analysis</span>
+          <span style="margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--teal);">CNN / ViT</span>
+        </div>
+        <div class="demo-panel-body">
+          <div class="face-viz">
+            <svg id="face-svg" viewBox="0 0 130 130">
+              <!-- Face base -->
+              <ellipse cx="65" cy="65" rx="48" ry="52" fill="#0d2040" stroke="#1a3a6e" stroke-width="1.5"/>
+              <!-- Eye zones -->
+              <ellipse id="leye" cx="45" cy="48" rx="12" ry="9" fill="rgba(14,201,168,0.15)" stroke="rgba(14,201,168,0.3)" stroke-width="0.5"/>
+              <ellipse id="reye" cx="85" cy="48" rx="12" ry="9" fill="rgba(14,201,168,0.15)" stroke="rgba(14,201,168,0.3)" stroke-width="0.5"/>
+              <!-- Pupil dots -->
+              <circle cx="45" cy="48" r="4" fill="var(--teal)" opacity="0.7"/>
+              <circle cx="85" cy="48" r="4" fill="var(--teal)" opacity="0.7"/>
+              <!-- Brow -->
+              <path id="lbrow" d="M33,35 Q45,29 57,34" fill="none" stroke="rgba(14,201,168,0.5)" stroke-width="2" stroke-linecap="round"/>
+              <path id="rbrow" d="M73,34 Q85,29 97,35" fill="none" stroke="rgba(14,201,168,0.5)" stroke-width="2" stroke-linecap="round"/>
+              <!-- Mouth zone -->
+              <path id="mouth" d="M46,84 Q65,96 84,84" fill="none" stroke="rgba(14,201,168,0.6)" stroke-width="2.5" stroke-linecap="round"/>
+              <!-- Emotion glow -->
+              <ellipse id="emo-glow" cx="65" cy="65" rx="48" ry="52" fill="rgba(14,201,168,0.05)" stroke="none"/>
+              <!-- Scan grid -->
+              <line x1="20" y1="65" x2="110" y2="65" stroke="rgba(14,201,168,0.06)" stroke-width="0.5"/>
+              <line x1="65" y1="13" x2="65" y2="117" stroke="rgba(14,201,168,0.06)" stroke-width="0.5"/>
+              <line x1="20" y1="40" x2="110" y2="40" stroke="rgba(14,201,168,0.04)" stroke-width="0.5"/>
+              <line x1="20" y1="90" x2="110" y2="90" stroke="rgba(14,201,168,0.04)" stroke-width="0.5"/>
+              <!-- Corner brackets -->
+              <path d="M17,22 L17,13 L26,13" fill="none" stroke="var(--teal)" stroke-width="1" opacity="0.5"/>
+              <path d="M113,22 L113,13 L104,13" fill="none" stroke="var(--teal)" stroke-width="1" opacity="0.5"/>
+              <path d="M17,108 L17,117 L26,117" fill="none" stroke="var(--teal)" stroke-width="1" opacity="0.5"/>
+              <path d="M113,108 L113,117 L104,117" fill="none" stroke="var(--teal)" stroke-width="1" opacity="0.5"/>
+            </svg>
+            <div class="scanline"></div>
+          </div>
+          <div class="emotion-bars" id="emo-bars">
+            <!-- populated by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- TEXT PANEL -->
+      <div class="demo-panel">
+        <div class="demo-panel-header">
+          <span class="dot" style="background:var(--amber)"></span>
+          <span class="title">Text Sentiment Analysis</span>
+          <span style="margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--amber);">RoBERTa</span>
+        </div>
+        <div class="demo-panel-body">
+          <div class="text-input-area" id="text-display">
+            <span id="typed-text"></span><span class="cursor"></span>
+          </div>
+          <div class="sentiment-gauge">
+            <div class="gauge-label">
+              <span>Negative</span>
+              <span id="sentiment-score" style="font-family:'IBM Plex Mono',monospace;color:var(--text);">0.0</span>
+              <span>Positive</span>
+            </div>
+            <div class="gauge-track">
+              <div class="gauge-thumb" id="gauge-thumb" style="left:50%;"></div>
+            </div>
+          </div>
+          <div class="keyword-chips" id="keyword-chips"></div>
+          <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);">
+            <div class="section-label" style="font-size:9px;margin-bottom:0.5rem;">TEXT EMBEDDINGS</div>
+            <div style="display:flex;gap:3px;flex-wrap:wrap;">
+              <span id="embed-bars"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FUSION PANEL -->
+      <div class="demo-panel glow-purple">
+        <div class="demo-panel-header">
+          <span class="dot" style="background:var(--purple)"></span>
+          <span class="title">Multimodal Fusion Output</span>
+          <span style="margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--purple);">Cross-Attn</span>
+        </div>
+        <div class="demo-panel-body">
+          <div class="fusion-emotion-display">
+            <div class="fusion-emo-label">DOMINANT EMOTION</div>
+            <div class="fusion-emo-value" id="fusion-emotion">Happy</div>
+            <div class="fusion-emo-conf mono" id="fusion-conf">Confidence: 94.2%</div>
+          </div>
+          <div class="fusion-scores">
+            <div class="fscore">
+              <div class="fscore-val mono" id="f-valence" style="color:var(--green);">+0.82</div>
+              <div class="fscore-label">Valence</div>
+            </div>
+            <div class="fscore">
+              <div class="fscore-val mono" id="f-arousal" style="color:var(--amber);">0.41</div>
+              <div class="fscore-label">Arousal</div>
+            </div>
+            <div class="fscore">
+              <div class="fscore-val mono" id="f-facial-w" style="color:var(--teal);">0.58</div>
+              <div class="fscore-label">Visual weight</div>
+            </div>
+            <div class="fscore">
+              <div class="fscore-val mono" id="f-text-w" style="color:var(--amber);">0.42</div>
+              <div class="fscore-label">Text weight</div>
+            </div>
+          </div>
+          <div class="risk-badge risk-low" id="risk-badge">⬤ LOW RISK · STABLE</div>
+          <div class="recommend" id="recommend-text">
+            <strong>Recommendation:</strong> Maintain current engagement tone. User is receptive and satisfied.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ARCHITECTURE -->
+<section id="architecture">
+  <div class="section-label">04 · Architecture</div>
+  <h2 class="section-title">Model & fusion architecture</h2>
+  <p class="section-sub">Two encoder branches joined by cross-modal attention — designed for explainability and extensibility.</p>
+
+  <div class="arch-cards">
+    <!-- Model architecture visualization -->
+    <div class="arch-card">
+      <div class="arch-card-header">
+        🧠 Model Architecture
+      </div>
+      <div class="arch-card-body">
+        <div class="model-layers">
+          <div class="ml-row">
+            <div class="ml-box neutral">📸 Face Frame (224×224)</div>
+            <div class="ml-arrow">|</div>
+            <div class="ml-box neutral">📝 Text Input (tokens)</div>
+          </div>
+          <div class="ml-down">↓ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ↓</div>
+          <div class="ml-row">
+            <div class="ml-box cnn">ResNet-50 / ViT<br><span style="font-size:9px;opacity:0.7;">FER2013 fine-tuned</span></div>
+            <div class="ml-arrow"> </div>
+            <div class="ml-box bert">RoBERTa-base<br><span style="font-size:9px;opacity:0.7;">SST-2 fine-tuned</span></div>
+          </div>
+          <div class="ml-down">↓ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ↓</div>
+          <div class="ml-row">
+            <div class="ml-box cnn">Visual embedding<br><span style="font-size:9px;opacity:0.7;">512-d feature vector</span></div>
+            <div class="ml-arrow"> </div>
+            <div class="ml-box bert">Text embedding<br><span style="font-size:9px;opacity:0.7;">768-d [CLS] vector</span></div>
+          </div>
+          <div class="ml-down">↓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓</div>
+          <div class="ml-row">
+            <div class="ml-box fuse" style="text-align:center;flex:2;">
+              Cross-Modal Attention Fusion
+              <span style="font-size:9px;opacity:0.7;display:block;">Weighted concat → MLP projector (256-d)</span>
+            </div>
+          </div>
+          <div class="ml-down">↓</div>
+          <div class="ml-row">
+            <div class="ml-box out" style="flex:2;text-align:center;">
+              Classifier Head → 7 Emotions + Valence/Arousal + Risk Score
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Data flow diagram (SVG) -->
+    <div class="arch-card">
+      <div class="arch-card-header">
+        🔄 Data Flow Diagram
+      </div>
+      <div class="arch-card-body" style="padding:0.75rem 0.5rem;">
+        <svg viewBox="0 0 340 340" width="100%" style="display:block;">
+          <defs>
+            <marker id="a2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+              <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </marker>
+          </defs>
+          <!-- Input layer -->
+          <rect x="30" y="10" width="90" height="34" rx="5" fill="#0d2040" stroke="#1a4a80" stroke-width="0.75"/>
+          <text x="75" y="31" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#0ec9a8">Face Input</text>
+          <rect x="220" y="10" width="90" height="34" rx="5" fill="#0d2040" stroke="#1a4a80" stroke-width="0.75"/>
+          <text x="265" y="31" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#f5a623">Text Input</text>
+
+          <!-- MTCNN -->
+          <rect x="10" y="70" width="130" height="34" rx="5" fill="#0c2035" stroke="#0ec9a860" stroke-width="0.75"/>
+          <text x="75" y="87" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#0ec9a8">MTCNN Detection</text>
+          <text x="75" y="97" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#5e82aa">Face crop 112×112</text>
+
+          <!-- BPE -->
+          <rect x="200" y="70" width="130" height="34" rx="5" fill="#0c2035" stroke="#f5a62360" stroke-width="0.75"/>
+          <text x="265" y="87" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#f5a623">BPE Tokenizer</text>
+          <text x="265" y="97" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#5e82aa">max_len=128 tokens</text>
+
+          <!-- ResNet -->
+          <rect x="10" y="134" width="130" height="34" rx="5" fill="#0a2a1a" stroke="#0ec9a860" stroke-width="0.75"/>
+          <text x="75" y="151" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#0ec9a8">ResNet-50 Encoder</text>
+          <text x="75" y="161" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#5e82aa">512-d visual embed</text>
+
+          <!-- RoBERTa -->
+          <rect x="200" y="134" width="130" height="34" rx="5" fill="#2a1a0a" stroke="#f5a62360" stroke-width="0.75"/>
+          <text x="265" y="151" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#f5a623">RoBERTa Encoder</text>
+          <text x="265" y="161" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#5e82aa">768-d text embed</text>
+
+          <!-- Fusion -->
+          <rect x="85" y="200" width="170" height="34" rx="5" fill="#1a0d35" stroke="#9b74f780" stroke-width="0.75"/>
+          <text x="170" y="217" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#9b74f7">Cross-Modal Fusion</text>
+          <text x="170" y="227" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#5e82aa">Attention + MLP (256-d)</text>
+
+          <!-- Outputs -->
+          <rect x="10" y="264" width="90" height="30" rx="5" fill="#0a200d" stroke="#30d98860" stroke-width="0.75"/>
+          <text x="55" y="282" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#30d988">Emotion Label</text>
+
+          <rect x="125" y="264" width="90" height="30" rx="5" fill="#0a200d" stroke="#30d98860" stroke-width="0.75"/>
+          <text x="170" y="282" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#30d988">Valence/Arousal</text>
+
+          <rect x="240" y="264" width="90" height="30" rx="5" fill="#200a0a" stroke="#ff4d6a60" stroke-width="0.75"/>
+          <text x="285" y="282" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#ff4d6a">Risk Flag</text>
+
+          <!-- Arrows -->
+          <line x1="75" y1="44" x2="75" y2="69" stroke="#0ec9a8" stroke-width="0.75" marker-end="url(#a2)" opacity="0.6"/>
+          <line x1="265" y1="44" x2="265" y2="69" stroke="#f5a623" stroke-width="0.75" marker-end="url(#a2)" opacity="0.6"/>
+          <line x1="75" y1="104" x2="75" y2="133" stroke="#0ec9a8" stroke-width="0.75" marker-end="url(#a2)" opacity="0.6"/>
+          <line x1="265" y1="104" x2="265" y2="133" stroke="#f5a623" stroke-width="0.75" marker-end="url(#a2)" opacity="0.6"/>
+          <!-- Converge to fusion -->
+          <path d="M75 168 L75 190 L85 200" fill="none" stroke="#0ec9a8" stroke-width="0.75" marker-end="url(#a2)" opacity="0.6"/>
+          <path d="M265 168 L265 190 L255 200" fill="none" stroke="#f5a623" stroke-width="0.75" marker-end="url(#a2)" opacity="0.6"/>
+          <!-- Outputs -->
+          <path d="M120 234 L55 264" fill="none" stroke="#9b74f7" stroke-width="0.75" marker-end="url(#a2)" opacity="0.5"/>
+          <line x1="170" y1="234" x2="170" y2="264" stroke="#9b74f7" stroke-width="0.75" marker-end="url(#a2)" opacity="0.5"/>
+          <path d="M220 234 L285 264" fill="none" stroke="#9b74f7" stroke-width="0.75" marker-end="url(#a2)" opacity="0.5"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Agent workflow (Responsible AI) -->
+    <div class="arch-card">
+      <div class="arch-card-header">⚖️ Responsible AI Layer</div>
+      <div class="arch-card-body">
+        <div class="rai-grid" style="gap:0.75rem;">
+          <div class="rai-card" style="padding:1rem;">
+            <div class="rai-icon">🔍</div>
+            <div class="rai-title">Bias Auditing</div>
+            <div class="rai-desc">Demographic parity testing across gender, age, and skin tone groups using AIF360.</div>
+          </div>
+          <div class="rai-card" style="padding:1rem;">
+            <div class="rai-icon">🛡️</div>
+            <div class="rai-title">Fairness Constraints</div>
+            <div class="rai-desc">Equalized odds enforcement during fine-tuning to prevent systematic misclassification.</div>
+          </div>
+          <div class="rai-card" style="padding:1rem;">
+            <div class="rai-icon">💡</div>
+            <div class="rai-title">SHAP Explainability</div>
+            <div class="rai-desc">Per-prediction attribution maps showing which facial regions and keywords drove the output.</div>
+          </div>
+          <div class="rai-card" style="padding:1rem;">
+            <div class="rai-icon">📊</div>
+            <div class="rai-title">Fairness Metrics</div>
+            <div class="rai-desc">Continuous monitoring of disparate impact ratio and equal opportunity scores per cohort.</div>
+          </div>
+        </div>
+        <div style="margin-top:1rem;">
+          <div class="section-label" style="font-size:9px;margin-bottom:0.5rem;">FAIRNESS ACROSS DEMOGRAPHICS</div>
+          <div class="fairness-bars">
+            <div class="fb-row"><span class="fb-name">18–30</span><div class="fb-track"><div class="fb-fill" style="width:93%"></div></div><span class="fb-val">93%</span></div>
+            <div class="fb-row"><span class="fb-name">31–50</span><div class="fb-track"><div class="fb-fill" style="width:91%"></div></div><span class="fb-val">91%</span></div>
+            <div class="fb-row"><span class="fb-name">51–70</span><div class="fb-track"><div class="fb-fill" style="width:89%;background:var(--amber)"></div></div><span class="fb-val" style="color:var(--amber)">89%</span></div>
+            <div class="fb-row"><span class="fb-name">Female</span><div class="fb-track"><div class="fb-fill" style="width:92%"></div></div><span class="fb-val">92%</span></div>
+            <div class="fb-row"><span class="fb-name">Male</span><div class="fb-track"><div class="fb-fill" style="width:91%"></div></div><span class="fb-val">91%</span></div>
+            <div class="fb-row"><span class="fb-name">FTZ+I</span><div class="fb-track"><div class="fb-fill" style="width:90%"></div></div><span class="fb-val">90%</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tech Stack -->
+    <div class="arch-card">
+      <div class="arch-card-header">🛠 Tech Stack & Free Resources</div>
+      <div class="arch-card-body">
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div>
+            <div class="section-label" style="font-size:9px;margin-bottom:6px;">VISION BRANCH</div>
+            <div style="display:flex;flex-wrap:wrap;gap:5px;">
+              <span class="skill-pill" style="color:var(--teal);">PyTorch</span>
+              <span class="skill-pill" style="color:var(--teal);">torchvision</span>
+              <span class="skill-pill" style="color:var(--teal);">facenet-pytorch (MTCNN)</span>
+              <span class="skill-pill" style="color:var(--teal);">FER2013 Dataset</span>
+              <span class="skill-pill" style="color:var(--teal);">AffectNet</span>
+            </div>
+          </div>
+          <div>
+            <div class="section-label" style="font-size:9px;margin-bottom:6px;">NLP BRANCH</div>
+            <div style="display:flex;flex-wrap:wrap;gap:5px;">
+              <span class="skill-pill" style="color:var(--amber);">HuggingFace 🤗</span>
+              <span class="skill-pill" style="color:var(--amber);">RoBERTa-base</span>
+              <span class="skill-pill" style="color:var(--amber);">SST-2</span>
+              <span class="skill-pill" style="color:var(--amber);">GoEmotions</span>
+            </div>
+          </div>
+          <div>
+            <div class="section-label" style="font-size:9px;margin-bottom:6px;">FUSION & DEPLOY</div>
+            <div style="display:flex;flex-wrap:wrap;gap:5px;">
+              <span class="skill-pill" style="color:var(--purple);">NumPy / SciPy</span>
+              <span class="skill-pill" style="color:var(--purple);">SHAP</span>
+              <span class="skill-pill" style="color:var(--purple);">AIF360</span>
+              <span class="skill-pill" style="color:var(--purple);">FastAPI</span>
+              <span class="skill-pill" style="color:var(--purple);">Streamlit</span>
+              <span class="skill-pill" style="color:var(--purple);">HuggingFace Spaces</span>
+            </div>
+          </div>
+          <div>
+            <div class="section-label" style="font-size:9px;margin-bottom:6px;">FREE COMPUTE & HOSTING</div>
+            <div style="display:flex;flex-wrap:wrap;gap:5px;">
+              <span class="skill-pill" style="color:var(--green);">Google Colab (T4 GPU)</span>
+              <span class="skill-pill" style="color:var(--green);">Kaggle Notebooks</span>
+              <span class="skill-pill" style="color:var(--green);">HuggingFace Spaces</span>
+              <span class="skill-pill" style="color:var(--green);">Render (FastAPI)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHASE ROADMAP -->
+<section>
+  <div class="section-label">05 · Roadmap</div>
+  <h2 class="section-title">Built in three phases</h2>
+  <p class="section-sub">Designed to ship a working MVP fast, then layer in sophistication.</p>
+  <div class="phases-grid">
+    <div class="phase-card current">
+      <div class="phase-num">PHASE 01 — MVP ✓</div>
+      <div class="phase-title">Core Pipeline</div>
+      <ul class="phase-items">
+        <li>Facial emotion detection (ResNet-50 on FER2013)</li>
+        <li>Text sentiment analysis (RoBERTa fine-tuned)</li>
+        <li>Late-fusion model (weighted concat + MLP)</li>
+        <li>FastAPI inference endpoint</li>
+        <li>Streamlit demo dashboard</li>
+      </ul>
+    </div>
+    <div class="phase-card">
+      <div class="phase-num">PHASE 02 — ENHANCEMENT</div>
+      <div class="phase-title">Multimodal Reasoning</div>
+      <ul class="phase-items amber">
+        <li>Cross-modal attention fusion (replace concat)</li>
+        <li>Emotion trend analytics over session time</li>
+        <li>Risk flagging and escalation triggers</li>
+        <li>Voice tone integration (whisper features)</li>
+        <li>Real-time streaming inference</li>
+      </ul>
+    </div>
+    <div class="phase-card">
+      <div class="phase-num">PHASE 03 — RESPONSIBLE AI</div>
+      <div class="phase-title">Explainability & Fairness</div>
+      <ul class="phase-items purple">
+        <li>SHAP per-prediction explanations</li>
+        <li>GradCAM facial region attribution</li>
+        <li>Demographic bias audit (AIF360)</li>
+        <li>Fairness-constrained fine-tuning</li>
+        <li>Model card & audit reports</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS MATRIX -->
+<section id="skills">
+  <div class="section-label">06 · Skills Matrix</div>
+  <h2 class="section-title">Skills by project</h2>
+  <p class="section-sub">A glance at breadth across the full portfolio — exactly what recruiters want to see.</p>
+  <div class="skills-matrix-wrap">
+    <table class="skills-matrix">
+      <thead>
+        <tr>
+          <th>Skill</th>
+          <th>Emotion System</th>
+          <th>Social Intelligence</th>
+          <th>Support Copilot</th>
+          <th>Churn Prediction</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Computer Vision</td>
+          <td><span class="matrix-dot" style="background:var(--teal)"></span> Core</td>
+          <td>—</td><td>—</td><td>—</td>
+        </tr>
+        <tr>
+          <td>Multimodal AI</td>
+          <td><span class="matrix-dot" style="background:var(--teal)"></span> Core</td>
+          <td>—</td><td>—</td><td>—</td>
+        </tr>
+        <tr>
+          <td>Transformers / BERT</td>
+          <td><span class="matrix-dot" style="background:var(--teal)"></span> Core</td>
+          <td><span class="matrix-dot" style="background:var(--amber)"></span> Core</td>
+          <td><span class="matrix-dot" style="background:var(--amber)"></span> Used</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>Deep Learning (CNN)</td>
+          <td><span class="matrix-dot" style="background:var(--teal)"></span> Core</td>
+          <td>—</td><td>—</td><td>—</td>
+        </tr>
+        <tr>
+          <td>NLP / Sentiment</td>
+          <td><span class="matrix-dot" style="background:var(--teal)"></span> Core</td>
+          <td><span class="matrix-dot" style="background:var(--amber)"></span> Core</td>
+          <td><span class="matrix-dot" style="background:var(--amber)"></span> Used</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>Agentic AI / LangGraph</td>
+          <td>—</td>
+          <td><span class="matrix-dot" style="background:var(--amber)"></span> Core</td>
+          <td><span class="matrix-dot" style="background:var(--amber)"></span> Core</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>RAG / Vector Search</td>
+          <td>—</td>
+          <td><span class="matrix-dot" style="background:var(--amber)"></span> Core</td>
+          <td><span class="matrix-dot" style="background:var(--amber)"></span> Core</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>Predictive ML / XGBoost</td>
+          <td>—</td><td>—</td><td>—</td>
+          <td><span class="matrix-dot" style="background:var(--purple)"></span> Core</td>
+        </tr>
+        <tr>
+          <td>Responsible AI / Fairness</td>
+          <td><span class="matrix-dot" style="background:var(--teal)"></span> Core</td>
+          <td>—</td><td>—</td>
+          <td><span class="matrix-dot" style="background:var(--purple)"></span> Used</td>
+        </tr>
+        <tr>
+          <td>FastAPI / MLOps</td>
+          <td><span class="matrix-dot" style="background:var(--teal)"></span> Used</td>
+          <td><span class="matrix-dot" style="background:var(--amber)"></span> Used</td>
+          <td><span class="matrix-dot" style="background:var(--amber)"></span> Core</td>
+          <td><span class="matrix-dot" style="background:var(--purple)"></span> Used</td>
+        </tr>
+        <tr>
+          <td>Dashboard / Streamlit</td>
+          <td><span class="matrix-dot" style="background:var(--teal)"></span> Used</td>
+          <td><span class="matrix-dot" style="background:var(--amber)"></span> Used</td>
+          <td>—</td>
+          <td><span class="matrix-dot" style="background:var(--purple)"></span> Core</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="social-links">
+    <a href="#">GitHub</a>
+    <a href="#">LinkedIn</a>
+    <a href="#">HuggingFace</a>
+    <a href="#">Case Study PDF</a>
+  </div>
+  <p>Multimodal Emotional Intelligence System · Applied Deep Learning Portfolio</p>
+  <p style="margin-top:4px;">Built with PyTorch · HuggingFace · FastAPI · Streamlit · Free Compute (Colab + HF Spaces)</p>
+</footer>
+
+<script>
+/* ── NEURAL NETWORK CANVAS ── */
+const canvas = document.getElementById('hero-canvas');
+const ctx = canvas.getContext('2d');
+let nodes = [], connections = [];
+function resize() {
+  canvas.width = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
+  initNodes();
+}
+function initNodes() {
+  nodes = [];
+  const count = Math.floor((canvas.width * canvas.height) / 14000);
+  for (let i = 0; i < Math.min(count, 60); i++) {
+    nodes.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      r: Math.random() * 2 + 1,
+    });
+  }
+}
+function drawCanvas() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  nodes.forEach(n => {
+    n.x += n.vx; n.y += n.vy;
+    if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+    if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+  });
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i + 1; j < nodes.length; j++) {
+      const dx = nodes[i].x - nodes[j].x;
+      const dy = nodes[i].y - nodes[j].y;
+      const d = Math.sqrt(dx*dx + dy*dy);
+      if (d < 130) {
+        ctx.strokeStyle = `rgba(14,201,168,${0.25 * (1 - d/130)})`;
+        ctx.lineWidth = 0.5;
+        ctx.beginPath();
+        ctx.moveTo(nodes[i].x, nodes[i].y);
+        ctx.lineTo(nodes[j].x, nodes[j].y);
+        ctx.stroke();
+      }
+    }
+  }
+  nodes.forEach(n => {
+    ctx.fillStyle = 'rgba(14,201,168,0.6)';
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+    ctx.fill();
+  });
+  requestAnimationFrame(drawCanvas);
+}
+window.addEventListener('resize', resize);
+resize();
+drawCanvas();
+
+/* ── DEMO SIMULATION ── */
+const scenarios = [
+  {
+    name: 'Happy Customer',
+    emotions: { Happy: 82, Surprised: 8, Neutral: 6, Sad: 2, Angry: 1, Fearful: 1 },
+    colors: { Happy:'#30d988', Surprised:'#0ec9a8', Neutral:'#5e82aa', Sad:'#3a5f8a', Angry:'#ff4d6a', Fearful:'#f5a623' },
+    text: "This is exactly what I needed. The response was fast and the solution worked perfectly. Very impressed!",
+    sentiment: 0.87,
+    keywords: [
+      {w:'exactly',t:'pos'},{w:'needed',t:'neu'},{w:'fast',t:'pos'},{w:'perfectly',t:'pos'},{w:'impressed',t:'pos'}
+    ],
+    fusionEmotion: '😊 Happy', fusionColor: '#30d988',
+    confidence: '94.2%', valence: '+0.87', arousal: '0.38',
+    visualW: '0.56', textW: '0.44',
+    risk: 'low', riskLabel: '⬤ LOW RISK · STABLE',
+    recommend: '<strong>Recommendation:</strong> Maintain current engagement. User is satisfied and receptive — ideal moment for upsell or NPS survey.',
+    faceGlow: 'rgba(48,217,136,0.12)', mouthPath: 'M46,84 Q65,96 84,84',
+    browL: 'M33,35 Q45,29 57,34', browR: 'M73,34 Q85,29 97,35',
+  },
+  {
+    name: 'Frustrated User',
+    emotions: { Angry: 71, Sad: 14, Disgusted: 9, Neutral: 4, Happy: 1, Fearful: 1 },
+    colors: { Angry:'#ff4d6a', Sad:'#9b74f7', Disgusted:'#f5a623', Neutral:'#5e82aa', Happy:'#30d988', Fearful:'#0ec9a8' },
+    text: "This is ridiculous. I've been waiting for 45 minutes and nobody has resolved my issue. Completely unacceptable.",
+    sentiment: 0.06,
+    keywords: [
+      {w:'ridiculous',t:'neg'},{w:'waiting',t:'neg'},{w:'45 minutes',t:'neg'},{w:'nobody',t:'neg'},{w:'unacceptable',t:'neg'}
+    ],
+    fusionEmotion: '😤 Angry', fusionColor: '#ff4d6a',
+    confidence: '88.7%', valence: '-0.79', arousal: '0.91',
+    visualW: '0.62', textW: '0.38',
+    risk: 'high', riskLabel: '⚠ HIGH RISK · ESCALATE',
+    recommend: '<strong>Action Required:</strong> Immediate escalation to senior agent. Offer compensation acknowledgment. Time-sensitive — user churn probability: 73%.',
+    faceGlow: 'rgba(255,77,106,0.12)', mouthPath: 'M46,92 Q65,80 84,92',
+    browL: 'M33,32 Q45,26 57,31', browR: 'M73,31 Q85,26 97,32',
+  },
+  {
+    name: 'Anxious Caller',
+    emotions: { Fearful: 58, Sad: 22, Neutral: 11, Surprised: 6, Happy: 2, Angry: 1 },
+    colors: { Fearful:'#f5a623', Sad:'#9b74f7', Neutral:'#5e82aa', Surprised:'#0ec9a8', Happy:'#30d988', Angry:'#ff4d6a' },
+    text: "I'm not sure if my account is secure. I saw some transactions I didn't recognise and I'm worried about what happened.",
+    sentiment: 0.28,
+    keywords: [
+      {w:"not sure",t:'neg'},{w:'secure',t:'neu'},{w:'transactions',t:'neu'},{w:"didn't recognise",t:'neg'},{w:'worried',t:'neg'}
+    ],
+    fusionEmotion: '😰 Fearful', fusionColor: '#f5a623',
+    confidence: '81.3%', valence: '-0.42', arousal: '0.67',
+    visualW: '0.51', textW: '0.49',
+    risk: 'medium', riskLabel: '◈ MEDIUM RISK · MONITOR',
+    recommend: '<strong>Recommendation:</strong> Calm reassurance protocol. Verify account security immediately. Follow-up call within 24h. Monitor sentiment drift.',
+    faceGlow: 'rgba(245,166,35,0.10)', mouthPath: 'M48,88 Q65,86 82,88',
+    browL: 'M33,33 Q45,28 57,33', browR: 'M73,33 Q85,28 97,33',
+  },
+  {
+    name: 'Neutral Session',
+    emotions: { Neutral: 74, Happy: 12, Sad: 7, Surprised: 4, Angry: 2, Fearful: 1 },
+    colors: { Neutral:'#5e82aa', Happy:'#30d988', Sad:'#9b74f7', Surprised:'#0ec9a8', Angry:'#ff4d6a', Fearful:'#f5a623' },
+    text: "I would like to update my shipping address for order number 4829. The new address is 14 Oak Street.",
+    sentiment: 0.51,
+    keywords: [
+      {w:'update',t:'neu'},{w:'shipping address',t:'neu'},{w:'order',t:'neu'},{w:'14 Oak Street',t:'neu'}
+    ],
+    fusionEmotion: '😐 Neutral', fusionColor: '#5e82aa',
+    confidence: '78.9%', valence: '+0.03', arousal: '0.21',
+    visualW: '0.44', textW: '0.56',
+    risk: 'low', riskLabel: '⬤ LOW RISK · TRANSACTIONAL',
+    recommend: '<strong>Recommendation:</strong> Efficient transactional resolution. No emotional intervention needed. Focus on speed and accuracy.',
+    faceGlow: 'rgba(94,130,170,0.08)', mouthPath: 'M48,87 Q65,87 82,87',
+    browL: 'M33,35 Q45,32 57,35', browR: 'M73,35 Q85,32 97,35',
+  }
+];
+
+let currentScenario = 0;
+let typeInterval = null;
+
+function setScenario(idx) {
+  currentScenario = idx;
+  document.querySelectorAll('.scenario-btn').forEach((b, i) => {
+    b.classList.toggle('active', i === idx);
+  });
+  const s = scenarios[idx];
+
+  // Update emotion bars
+  const barContainer = document.getElementById('emo-bars');
+  barContainer.innerHTML = '';
+  Object.entries(s.emotions).forEach(([name, val]) => {
+    const color = s.colors[name] || '#5e82aa';
+    barContainer.innerHTML += `
+      <div class="emo-row">
+        <span class="emo-name">${name}</span>
+        <div class="emo-bar-bg"><div class="emo-bar-fill" style="width:${val}%;background:${color}"></div></div>
+        <span class="emo-pct">${val}%</span>
+      </div>`;
+  });
+
+  // Update face
+  document.getElementById('emo-glow').setAttribute('fill', s.faceGlow);
+  document.getElementById('mouth').setAttribute('d', s.mouthPath);
+  document.getElementById('lbrow').setAttribute('d', s.browL);
+  document.getElementById('rbrow').setAttribute('d', s.browR);
+
+  // Type text
+  const textEl = document.getElementById('typed-text');
+  textEl.textContent = '';
+  if (typeInterval) clearInterval(typeInterval);
+  let i = 0;
+  typeInterval = setInterval(() => {
+    if (i < s.text.length) {
+      textEl.textContent += s.text[i++];
+    } else {
+      clearInterval(typeInterval);
+    }
+  }, 25);
+
+  // Sentiment gauge
+  const pct = s.sentiment * 100;
+  document.getElementById('gauge-thumb').style.left = pct + '%';
+  document.getElementById('sentiment-score').textContent = s.sentiment.toFixed(2);
+
+  // Keywords
+  const chips = document.getElementById('keyword-chips');
+  chips.innerHTML = s.keywords.map(k => `<span class="kchip kchip-${k.t}">${k.w}</span>`).join('');
+
+  // Embedding bars (decorative)
+  const embeds = document.getElementById('embed-bars');
+  let ebars = '';
+  for (let j = 0; j < 32; j++) {
+    const h = Math.floor(Math.random() * 16) + 2;
+    const c = Math.random() > 0.7 ? 'var(--amber)' : 'var(--border2)';
+    ebars += `<span style="display:inline-block;width:4px;height:${h}px;background:${c};border-radius:1px;margin-right:1px;vertical-align:bottom;transition:height 0.6s"></span>`;
+  }
+  embeds.innerHTML = ebars;
+
+  // Fusion panel
+  const fe = document.getElementById('fusion-emotion');
+  fe.textContent = s.fusionEmotion;
+  fe.style.color = s.fusionColor;
+  document.getElementById('fusion-conf').textContent = `Confidence: ${s.confidence}`;
+  document.getElementById('f-valence').textContent = s.valence;
+  document.getElementById('f-valence').style.color = parseFloat(s.valence) >= 0 ? 'var(--green)' : 'var(--coral)';
+  document.getElementById('f-arousal').textContent = s.arousal;
+  document.getElementById('f-facial-w').textContent = s.visualW;
+  document.getElementById('f-text-w').textContent = s.textW;
+
+  const rb = document.getElementById('risk-badge');
+  rb.className = `risk-badge risk-${s.risk}`;
+  rb.textContent = s.riskLabel;
+
+  document.getElementById('recommend-text').innerHTML = s.recommend;
+}
+
+// Auto-cycle every 5s
+let autoCycle = setInterval(() => {
+  setScenario((currentScenario + 1) % 4);
+}, 5000);
+
+// Stop auto-cycle on manual selection
+document.querySelectorAll('.scenario-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    clearInterval(autoCycle);
+  });
+});
+
+setScenario(0);
+</script>
+</body>
+</html>

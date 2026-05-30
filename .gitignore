@@ -1,0 +1,22 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Models (too large for GitHub)
+models/hf_pretrained/
+models/checkpoints/*.pt
+data/fer2013/
+data/goemotions/
+data/affectnet_sample/
+
+# OS
+.DS_Store
+.env
+
+# Logs
+*.log
