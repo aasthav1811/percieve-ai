@@ -43,7 +43,11 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],   # restrict in production
+    allow_origins=[
+        "http://localhost:3000",
+        "https://emit-ai.vercel.app",
+        "*",
+    ],
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -186,5 +190,5 @@ async def analyze_text(text: str = Form(..., description="Text to analyze")):
 
 if __name__ == "__main__":
     import uvicorn
-    port = int(os.environ.get("PORT", 8000))
-    uvicorn.run("api:app", host="0.0.0.0", port=port, reload=True)
+    port = int(os.environ.get("PORT", 7860))
+    uvicorn.run("api:app", host="0.0.0.0", port=port, reload=False)
