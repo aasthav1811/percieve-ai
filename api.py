@@ -61,6 +61,15 @@ def get_pipeline() -> EmotionInferencePipeline:
         _pipeline = EmotionInferencePipeline()
     return _pipeline
 
+@app.on_event("startup")
+async def startup_event():
+    global _pipeline
+    print("[startup] Loading models into memory...")
+    _pipeline = EmotionInferencePipeline()
+    print("[startup] Models ready.")
+
+
+
 
 # ── Response models ───────────────────────────────────────────────────────────
 
