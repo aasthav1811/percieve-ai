@@ -20,3 +20,4 @@ data/affectnet_sample/
 
 # Logs
 *.log
+frontend/node_modules/
