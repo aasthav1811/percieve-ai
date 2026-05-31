@@ -170,27 +170,19 @@ async def analyze(
 
 @app.post("/analyze/text", response_model=TextOnlyResponse)
 async def analyze_text(text: str = Form(..., description="Text to analyze")):
-    """
-    Text-only emotion and sentiment analysis (no image required).
-    Faster — useful for chat or voice transcript pipelines.
-    """
+    """Text-only emotion and sentiment analysis."""
     if not text.strip():
         raise HTTPException(status_code=422, detail="Text cannot be empty.")
 
     t0 = time.perf_counter()
     pipeline = get_pipeline()
-    import torch
-    with torch.no_grad():
-        result = pipeline.text.encode_text(text.strip(), device=pipeline.device)
 
-    from fusion.cross_modal_attention import EMOTION_LABELS
-    probs = result["probs"][0].cpu().numpy()
-    emotion = EMOTION_LABELS[probs.argmax()]
+    txt_emotion, txt_probs, sentiment = pipeline._run_text(text.strip())
 
     return TextOnlyResponse(
-        emotion=emotion,
-        probs={k: float(v) for k, v in zip(EMOTION_LABELS, probs)},
-        sentiment_score=float(result["sentiment"][0, 0]),
+        emotion=txt_emotion,
+        probs=txt_probs,
+        sentiment_score=sentiment,
         inference_ms=(time.perf_counter() - t0) * 1000,
     )
 
