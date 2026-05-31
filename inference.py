@@ -346,7 +346,7 @@ DEMO_SCENARIOS = [
 # ── CLI ───────────────────────────────────────────────────────────────────────
 
 def parse_args():
-    p = argparse.ArgumentParser(description="emit_ai — Multimodal Emotion Inference")
+    p = argparse.ArgumentParser(description="perceive_ai — Multimodal Emotion Inference")
     p.add_argument("--image",  help="Path to face image")
     p.add_argument("--text",   help="Text input")
     p.add_argument("--demo",   action="store_true", help="Run all demo scenarios")

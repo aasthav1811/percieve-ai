@@ -42,7 +42,7 @@ export default function Header() {
           <span className="font-mono font-bold text-bg text-[11px]">EM</span>
         </div>
         <div>
-          <div className="font-display font-semibold text-[15px] gradient-text">emit_ai</div>
+          <div className="font-display font-semibold text-[15px] gradient-text">perceive_ai</div>
           <div className="font-mono text-[9px] text-muted tracking-[0.1em]">MULTIMODAL EMOTIONAL INTELLIGENCE</div>
         </div>
       </div>

@@ -180,7 +180,7 @@ export default function App() {
         {/* Footer */}
         <div className="max-w-[1280px] mx-auto mt-8 pt-4 border-t border-[#1a3a6e40] flex items-center justify-between flex-wrap gap-2">
           <p className="font-mono text-[9px] text-[#2a4a6a]">
-            emit_ai · ResNet-50 + RoBERTa-base + Cross-Modal Attention · FER2013 + GoEmotions
+            perceive_ai · ResNet-50 + RoBERTa-base + Cross-Modal Attention · FER2013 + GoEmotions
           </p>
           <p className="font-mono text-[9px] text-[#2a4a6a]">
             Deploy: HuggingFace Spaces · Render · Vercel

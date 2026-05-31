@@ -35,7 +35,7 @@ def download(repo_id, subfolder):
 
 if __name__ == "__main__":
     print("=" * 55)
-    print(" emit_ai — Pretrained Model Download")
+    print(" perceive_ai — Pretrained Model Download")
     print("=" * 55)
     print("\n[1/2] Vision encoder (ViT — FER2013 fine-tuned)...")
     download(VISION_MODEL, "vision")

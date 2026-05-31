@@ -45,7 +45,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:3000",
-        "https://emit-ai.vercel.app",
+        "https://perceive-ai.vercel.app",
         "*",
     ],
     allow_methods=["*"],
