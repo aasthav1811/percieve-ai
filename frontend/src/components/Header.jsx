@@ -7,8 +7,7 @@ const NAV_LINKS = [
   { label: 'Pipeline',  action: () => document.getElementById('pipeline-section')?.scrollIntoView({ behavior: 'smooth' }) },
   { label: 'Docs',      action: () => window.open('http://localhost:8000/docs', '_blank') },
   
-  { label: 'GitHub',    action: () => { console.log('GitHub clicked');
-                                       window.open('https://github.com/aasthav1811/percieve-ai', '_blank') },
+  { label: 'GitHub',    action: () => { window.location.href = 'https://github.com/aasthav1811/percieve-ai'; },
   }
 ]
 
