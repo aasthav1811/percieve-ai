@@ -6,7 +6,10 @@ const NAV_LINKS = [
   { label: 'Dashboard', action: () => window.scrollTo({ top: 0, behavior: 'smooth' }) },
   { label: 'Pipeline',  action: () => document.getElementById('pipeline-section')?.scrollIntoView({ behavior: 'smooth' }) },
   { label: 'Docs',      action: () => window.open('http://localhost:8000/docs', '_blank') },
-  { label: 'GitHub',    action: () => window.open('https://github.com/aasthav1811/percieve-ai', '_blank') },
+  
+  { label: 'GitHub',    action: () => { console.log('GitHub clicked');
+                                       window.open('https://github.com/aasthav1811/percieve-ai', '_blank') },
+  }
 ]
 
 export default function Header() {
