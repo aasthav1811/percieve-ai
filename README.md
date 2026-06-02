@@ -1,5 +1,5 @@
 ---
-title: Emit AI
+title: Perceive AI
 emoji: 🧠
 colorFrom: blue
 colorTo: green
