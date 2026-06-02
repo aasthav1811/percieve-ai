@@ -39,7 +39,7 @@ export default function Header() {
         onClick={() => { setActiveNav('Dashboard'); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
       >
         <div className="w-8 h-8 rounded-md bg-teal flex items-center justify-center">
-          <span className="font-mono font-bold text-bg text-[11px]">EM</span>
+          <span className="font-mono font-bold text-bg text-[11px]">P-AI</span>
         </div>
         <div>
           <div className="font-display font-semibold text-[15px] gradient-text">perceive_ai</div>
